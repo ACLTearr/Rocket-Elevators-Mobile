@@ -3,7 +3,7 @@ import { Image, ImageBackground, StyleSheet, View, Button, Alert, TextInput } fr
 
 function SignIn(props) {
 
-    const [email, onChangeText] = React.useState('Please enter an email address');
+    const [email, onChangeText] = React.useState('');
 
     const redirect = () => {
         fetch(`https://rest-api-burroughs.herokuapp.com/api/employees/valid/${email}`)
@@ -23,7 +23,9 @@ function SignIn(props) {
             source={require('../assets/background.jpg')}
         >
             <Image style={styles.logo} source={require('../assets/logo.png')} />    
-            <TextInput style={styles.input} onChangeText={(text) => onChangeText(text)} value={email} />
+            <TextInput
+                style={styles.input}
+                onChangeText={(text) => onChangeText(text)} value={email} />
             <Button title='Sign In' style={styles.signInButton} onPress={redirect} />
         </ImageBackground>
     );
