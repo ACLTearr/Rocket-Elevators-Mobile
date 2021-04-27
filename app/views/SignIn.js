@@ -1,14 +1,30 @@
 import React from 'react';
-import { Image, ImageBackground, StyleSheet, View } from 'react-native';
+import { Image, ImageBackground, StyleSheet, View, Button, Alert, TextInput } from 'react-native';
 
 function SignIn(props) {
+
+    const [email, onChangeText] = React.useState('Please enter an email address');
+
+    const redirect = () => {
+        fetch(`https://rest-api-burroughs.herokuapp.com/api/employees/valid/${email}`)
+            .then((result) => result.json())
+            .then((resultJson) => {
+                if (resultJson) {
+                    props.navigation.navigate('Home');
+                } else {
+                    Alert.alert('Pleae enter an employee email');
+                }
+            })
+    }
+
     return (
         <ImageBackground
             style={styles.background}
             source={require('../assets/background.jpg')}
         >
-            <Image style={styles.logo} source={require('../assets/logo.png')} />
-            <View style={styles.signInButton}></View>
+            <Image style={styles.logo} source={require('../assets/logo.png')} />    
+            <TextInput style={styles.input} onChangeText={(text) => onChangeText(text)} value={email} />
+            <Button title='Sign In' style={styles.signInButton} onPress={redirect} />
         </ImageBackground>
     );
 }
@@ -16,7 +32,7 @@ function SignIn(props) {
 const styles = StyleSheet.create({
     background: {
         flex: 1,
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     signInButton: {
@@ -29,6 +45,11 @@ const styles = StyleSheet.create({
         width: 295,
         position: 'absolute',
         top: 50,
+    },
+    input: {
+        height: 50,
+        width: 250,
+        backgroundColor: 'white',
     },
 })
 
