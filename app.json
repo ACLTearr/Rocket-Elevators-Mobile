@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
-    }
+    },
+    "description": "This is a mobile app created in React Native for CodeBoxx's week 14 of the Odyssey program.",
+    "githubUrl": "https://github.com/ACLTearr/Rocket-Elevators-Mobile"
   }
 }
